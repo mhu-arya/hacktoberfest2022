@@ -133,3 +133,41 @@ void login(){
         }
     }
 }
+
+/*
+    addData function:
+        1. It justs pushes the passed values into it to the vectors.
+*/
+
+void addData(string name, string pass){
+    replace(name.begin(), name.end(), ' ', '_');
+    id.push_back(name);
+    replace(pass.begin(), pass.end(), ' ', '_');
+    password.push_back(pass);
+}
+
+/* 
+
+    Create a Account:
+        1. user is prompted to create an account. By default the spaces get converted to underscores
+
+*/
+
+void createAccount(){
+    string uname, paswd, dummy;
+    getline(cin, dummy);
+    cout << endl;
+    cout << "Enter user name [spaces get converted to underscore]: ";
+    getline(cin, uname);
+
+    cout << endl;
+
+    cout << "Enter a password[spaces get converted to underscore]: ";
+    getline(cin, paswd);
+
+    addData(uname, paswd);
+    cout << endl;
+    cout << "Thank You! Your account has been created!" << endl << endl;
+
+    printIntroMenu();
+}

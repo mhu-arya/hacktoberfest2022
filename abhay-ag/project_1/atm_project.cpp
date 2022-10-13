@@ -171,3 +171,58 @@ void createAccount(){
 
     printIntroMenu();
 }
+
+/* 
+    printMainMenu funtion:
+        1. It is called if the login is successful
+        2. It asks for the user choice for the functions like deposit, view balance, withdraw.
+        3. the program proceeds further according to the input provided.
+*/
+
+void printMainMenu(int index, string uname){
+    cout << endl;
+    cout << "--------Hello, " << uname << "! Please select from options below --------" << endl << endl;
+    cout << "d -> Deposit Money\nw -> Withdraw Money\nr -> Request Balance\nq -> Quit\n\n> " ;
+    cin >> mainInput;
+
+    switch (mainInput){
+        case 'd':
+            deposit(index, uname);
+            break;
+        case 'w':
+            withdraw(index, uname);
+            break;
+        case 'r':
+            request(index, uname);
+            break;
+        case 'q':
+            cout << "Thank you, " << uname << "!" << endl << endl;
+            printIntroMenu();
+            break;
+        default:
+            cout << endl;
+            cout << "Wrong Choice!! Please Enter Again!" << endl;
+            printMainMenu(index, uname);
+    }
+}
+
+/*
+    deposit function:
+        1. Facilitates the user to deposti amount into their account.
+*/
+
+void deposit(int index, string uname){
+    cout << endl;
+    int dpMoney;
+
+    cout << "Enter the amount to be depostied: $";
+    cin >> dpMoney;
+
+    bal.at(index) += dpMoney;
+    cout << endl;
+    cout << "Deposited Successfully!!" << endl << endl;
+    cout << "------------------------" << endl;
+
+
+    printMainMenu(index, uname);
+}

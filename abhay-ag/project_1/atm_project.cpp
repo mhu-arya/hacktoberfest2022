@@ -78,3 +78,58 @@ void printIntroMenu(){
             break;
     }
 }
+
+
+
+/*
+    Login Function:
+        1. This function first check if there are any accounts stored if there is no account the user is prompted to go to the intromenu function to create an account.
+        2. If there is/are account(s) in the storage then the user enters the username.
+        3. the program checks if the username exists before asking for password.
+        4. if the user exists then user is prompted to enter password
+        5. after that password validation occurs and based on that the program proceeds accordingly.
+*/
+
+void login(){
+    bool found = false;
+    string uname, paswd, dummy;
+    int index;
+    if (id.size() == 0 && password.size()  == 0){
+        cout << endl;
+        cout << "Currently we have no accounts!! Please create an account!" << endl;
+        printIntroMenu();
+    }
+    else{
+        getline(cin, dummy);
+        cout << endl;
+        cout << "Enter your User Name: ";
+        getline(cin, uname);
+        cout << endl;
+
+        for(int i = 0; i < id.size(); i ++){
+            if(uname == id[i]){
+                found = true;
+                index = i;
+                break;
+            }
+        }
+        if(found){
+            cout << "Enter your Password: ";
+            getline(cin, paswd);
+            if(password[index] == paswd){
+                cout << endl;
+                cout << "****** LOGIN SUCCESSFULL ******" << endl << endl;
+                printMainMenu(index, uname);
+            }
+            else{
+                cout << endl;
+                cout << "ERROR!!! PLEASE START AGAIN" << endl << endl;
+                printIntroMenu();
+            }
+        }
+        else{
+            cout << "No such user exists!! Please Register!" << endl << endl;
+            printIntroMenu();
+        }
+    }
+}

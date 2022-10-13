@@ -226,3 +226,75 @@ void deposit(int index, string uname){
 
     printMainMenu(index, uname);
 }
+/*
+    withdraw function:
+        1. Checks for the balance in the acount first.
+        2. If balance is 0 then moeny can't be withdrwan.
+        3. Else the control moves further where user is asked for amount to be withdrawn
+        4. the user has to enter amount and if enters more than the balance he/she has to enter again.
+*/
+
+void withdraw(int index, string uname){
+    int wdMoney;
+    /*try
+    {
+        cout << bal.at(index);
+    }
+    catch(const std::out_of_range& e)
+    {
+        cout << endl;
+        cout << "No balance!! Please deposit some money first!" << endl;
+
+    }*/
+    // The vector.at() function throws an  std::out_of_range exception if there is null value at that particular index. This try catch block handles it.
+
+    if(bal.at(index) == 0){
+        cout << endl;
+        cout << "Your balance is $0! You can't withdraw money right now!" << endl;
+        printMainMenu(index, uname);
+    }
+    else{
+        int i = 0;
+        cout << endl;
+        cout << "Enter amount to be withdrawn: $";
+        cin >> wdMoney;
+        while (!(wdMoney <= bal.at(index)))
+        {
+            if(i == 2){
+                cout << endl;
+                cout << "Sorry, invalid inputs recieved too many times! Start Again"<< endl;
+                printMainMenu(index, uname);
+                break;
+            }
+            cout << endl;
+            cout << "You don't have sufficient balance!" << endl << endl;
+            cout << "Enter amount to be withdrawn: $";
+            cin >> wdMoney;
+            i+=1;
+        }
+        
+        cin.clear();
+        bal.at(index) -= wdMoney;
+        cout << endl;
+        cout << "Transaction Successfull!!" << endl << endl;
+        cout << "--------------------------" << endl;
+        printMainMenu(index, uname);
+    }
+}
+
+/*
+    request funtion:
+        1. Displays the user balance.
+*/
+void request(int index, string uname){
+    if(bal.at(index) == 0){
+        cout << endl;
+        cout << "Your balance is $0!" << endl;
+        printMainMenu(index, uname);
+    }
+    else{
+        cout << endl;
+        cout << "Dear, "<< uname << " your balance is: $"<< bal.at(index) << endl; 
+        printMainMenu(index, uname);
+    }
+}
